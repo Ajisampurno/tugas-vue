@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!--vue js-->
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+
+    <title>Event Heandling</title>
+</head>
+
+<body>
+
+    <div id="example-1">
+        <button v-on:click="counter++">add 1</button>
+        <p>coun is: {{ counter }}</p>
+    </div>
+    <hr>
+
+    <div id="example-2">
+        <button @click="greet">Greet</button>
+    </div>
+    <hr>
+
+    <div id="example-3">
+        <button @click="say('hai')">Hai</button>
+        <button @click="say('hallo')">Hallo</button>
+    </div>
+    <hr>
+
+    <div id="example-4">
+        <button @click="showAlert">Click me</button>
+    </div>
+    <hr>
+
+    <div id="example-5">
+        <button @click="handleClick">Click me</button>
+    </div>
+    <hr>
+
+    <div id="example-6">
+        <!-- Tombol yang mencegah penyebaran event klik -->
+        <a @click.stop="doThis" href="#">Click me</a>
+    </div>
+
+    <script>
+        var example1 = new Vue({
+            el: '#example-1',
+            data: {
+                counter: 0
+            }
+        });
+
+        var example2 = new Vue({
+            el : '#example-2',
+            data:{
+                name: 'Aji sampurno'
+            },
+            methods: {
+                greet: function(event){
+                    alert('hallo '+this.name+' apakabar?')
+                    // `event` is the native DOM event
+                    if (event) {
+                        alert(event.target.tagName);
+                    }
+                }
+            }
+        });
+
+        var example3 = new Vue({
+            el:'#example-3',
+            methods:{
+                say: function(message){
+                    alert(message)
+                }
+            }
+        });
+
+        var example4 = new Vue({
+                el: '#example-4',
+                methods: {
+                    showAlert: function () {
+                        alert('Halo dari Vue.js!');
+                    }
+                }
+            });
+
+        var example5 = new Vue({
+                el: '#example-5',
+                methods: {
+                    handleClick: function (event) {
+                        // Mengakses objek event
+                        console.log('Event Object:', event);
+
+                        // Menampilkan pesan peringatan dengan informasi dari objek event
+                        alert('Halo dari Vue.js! Event Type: ' + event.type);
+                    }
+                }
+            });
+
+        var example6 = new Vue({
+                el: '#example-6',
+                methods: {
+                    doThis: function () {
+                        alert('Tombol diklik, tetapi event tidak menyebar!');
+                    }
+                }
+            });
+
+    </script>
+</body>
+
+</html>
